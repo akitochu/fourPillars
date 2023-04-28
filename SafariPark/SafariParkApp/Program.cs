@@ -38,29 +38,59 @@
             //Console.WriteLine($"h: {h}");
             //var rect = new Rectangle(4, 3);
             //Console.WriteLine(rect);
-            List<Object> gameObjects = new List<object>()
-            {
-                new Person ("Cathy", "French"),
-                new Hunter("Stephano", "Naressi", "Iphone13")
-            };
-            foreach (var gameObj in gameObjects)
-            {
-                Console.WriteLine(gameObj);
-            }
+            //Camera iPhone = new Camera("Apple");
 
-            Person yolondo = new Person("Yolondo", "Young");
-            SpartaWrite(yolondo);
+            //List<Object> gameObjects = new List<object>()
+            //{
+            //    new Person ("Cathy", "French"),
+            //    new Hunter("Stephano", "Naressi", iPhone)
+            //};
+            //foreach (var gameObj in gameObjects)
+            //{
+            //    Console.WriteLine(gameObj);
+            //}
 
-            List<IMovable> list = new List<IMovable>()
-            {
-                new Person ("Cathy", "French"),
-                new Hunter ("Stephano", "Naressi", "Iphone13"),
-                //new Airplane (200, 5, "AlghaliFly" )
-            };
-            foreach (var el in list)
-            {
-                Console.WriteLine(el.Move());
-            }
+            //Person yolondo = new Person("Yolondo", "Young");
+            //SpartaWrite(yolondo);
+
+            //List<IMovable> list = new List<IMovable>()
+            //{
+            //    new Person ("Cathy", "French"),
+            //    new Hunter ("Stephano", "Naressi", iPhone),
+            //    //new Airplane (200, 5, "AlghaliFly" )
+            //};
+            //foreach (var el in list)
+            //{
+            //    Console.WriteLine(el.Move());
+            //}
+
+
+            //List<IShootable> weaponsList = new List<IShootable>
+            //{
+            //    new LaserGun("zapper"),
+            //    new WaterPistol("moisteriser"),
+            //    new Hunter("Stephano", "Naressi", iPhone),
+            //    new Camera("Nikon")
+            //};
+
+            //foreach (var gun in weaponsList)
+            //{
+            //    Console.WriteLine(gun.Shoot());
+            //}
+
+            Console.WriteLine("Polymorphic shootout");
+            Camera pentax = new Camera("Pentax");
+            WaterPistol pistol = new WaterPistol("Supersoaker");
+            LaserGun laserGun = new LaserGun("Acme");
+            Hunter nish = new Hunter("Nish", "Mandal", pentax);
+            Console.WriteLine(nish.Shoot());
+            nish.Shooter = pistol;
+            Console.WriteLine(nish.Shoot());
+            nish.Shooter = laserGun;
+            Console.WriteLine(nish.Shoot());
+            nish.Shooter = pistol;
+            Console.WriteLine(nish.Shoot());
+
         }
 
         public static void SpartaWrite(Object obj)

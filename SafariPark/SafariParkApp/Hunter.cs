@@ -8,21 +8,23 @@ using System.Threading.Tasks;
 namespace SafariParkApp
 {
 
-    public class Hunter : Person
+    public class Hunter : Person, IShootable
     {
-        private string _camera;
-        public Hunter(string fName, string lName, string camera = "") : base(fName, lName) 
+        private IShootable _shooter;
+        //private string _camera;
+        public IShootable Shooter { get { return _shooter; } set {_shooter = value; } }
+        public Hunter(string fName, string lName, IShootable shooter) : base(fName, lName) 
         {
-            this._camera = camera;
+            Shooter = shooter;
         }
         public string Shoot()
         {
-            return $"{GetFullName()} has taken a photo with their {_camera}";
+            return $"{GetFullName()}: {Shooter.Shoot()}";
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()} Camera: {_camera}";
+            return $"{base.ToString()} Camera: {Shooter}";
         }
 
     }
