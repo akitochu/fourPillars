@@ -1,4 +1,7 @@
-﻿namespace SafariParkApp
+﻿using System.Net.Cache;
+using System.Runtime.CompilerServices;
+
+namespace SafariParkApp
 {
     internal class Program 
     {
@@ -78,18 +81,182 @@
             //    Console.WriteLine(gun.Shoot());
             //}
 
-            Console.WriteLine("Polymorphic shootout");
-            Camera pentax = new Camera("Pentax");
-            WaterPistol pistol = new WaterPistol("Supersoaker");
-            LaserGun laserGun = new LaserGun("Acme");
-            Hunter nish = new Hunter("Nish", "Mandal", pentax);
-            Console.WriteLine(nish.Shoot());
-            nish.Shooter = pistol;
-            Console.WriteLine(nish.Shoot());
-            nish.Shooter = laserGun;
-            Console.WriteLine(nish.Shoot());
-            nish.Shooter = pistol;
-            Console.WriteLine(nish.Shoot());
+            //Console.WriteLine("Polymorphic shootout");
+            //Camera pentax = new Camera("Pentax");
+            //WaterPistol pistol = new WaterPistol("Supersoaker");
+            //LaserGun laserGun = new LaserGun("Acme");
+            //Hunter nish = new Hunter("Nish", "Mandal", pentax);
+            //Console.WriteLine(nish.Shoot());
+            //nish.Shooter = pistol;
+            //Console.WriteLine(nish.Shoot());
+            //nish.Shooter = laserGun;
+            //Console.WriteLine(nish.Shoot());
+            //nish.Shooter = pistol;
+            //Console.WriteLine(nish.Shoot());
+
+
+            //var robOne = new Person("Bob", "Sponge") { Age = 20 };
+            //var robTwo = robOne;
+            //var areSame = robOne.Equals(robTwo);  //true
+            //Console.WriteLine(areSame);
+
+            //var robThree = new Person("Robert", "Sponge") { Age = 20 };
+            //var areSameOneThree = robOne.Equals(robThree);  // false
+            //Console.WriteLine(areSameOneThree);
+
+            //List<Person> personList =
+            //    new List<Person>
+            //    {
+            //        new Person("Bobert", "Sponge"),
+
+            //        new Person("Sandy", "Cheeks"){Age = 25},
+
+            //        new Person("Robert", "Sponge") { Age = 20 },
+
+            //        new Person("Squilliam", "Squid"){Age = 32}
+            //    };
+            //var hasRob = personList.Contains(robThree); //false
+            //Console.WriteLine(hasRob);
+
+            //var equals = robOne == robThree;
+            //var notEquals = robOne != robThree;
+
+            //personList.Sort();
+            //foreach (var person in personList)
+            //{
+            //    Console.WriteLine(person);
+            //}
+            //Console.WriteLine(personList[0].CompareTo(personList[1]));
+            //Console.WriteLine(personList[0].CompareTo(personList[0]));
+            //Console.WriteLine(personList[1].CompareTo(personList[0]));
+
+            //Collections Lesson
+
+            Camera cam = new Camera("MacBeth");
+            var helen = new Person { FirstName = "Helen", LastName = "Troy", Age = 22 };
+            var will = new Hunter("William", "Shakespeare", cam) { Age = 457 };
+            Console.WriteLine("List of people");
+            List<Person> thePeople = new List<Person> { helen, will };
+
+            foreach(var person in thePeople)
+            {
+                Console.WriteLine(person);
+            }
+
+            var numbers = new List<int>() { 5, 4, 3, 9, 0 };
+            numbers.Add(8);
+            numbers.Sort();
+            numbers.RemoveRange(1,2);
+            numbers.Insert(2, 1);
+            numbers.Reverse();
+            numbers.Remove(9);
+            var output = "";
+            foreach(int num in numbers)
+            {
+                Console.Write(num);
+            }
+
+            Console.WriteLine("linkedList of People");
+            LinkedList<Person> thePeopleLinked = new LinkedList<Person>();
+            thePeopleLinked.AddFirst(helen);
+            thePeopleLinked.AddLast(will);
+            thePeopleLinked.AddLast(new Person { FirstName = "Linda", LastName = "Smith", Age = 45 });
+            thePeopleLinked.AddAfter(thePeopleLinked.Find(helen) , new Person { FirstName = "John", LastName = "Green", Age = 2}); 
+            foreach(var person in thePeopleLinked)
+            {
+                Console.WriteLine(person);
+            }
+
+            var myQueue = new Queue<Person>();
+            myQueue.Enqueue(helen);
+            myQueue.Enqueue(will);
+            myQueue.Enqueue(new Person("Cathy"));
+            Console.WriteLine("\nQueue");
+            foreach(var q in myQueue)
+            {
+                Console.WriteLine(q);
+            }
+            var first = myQueue.Peek();
+            var serve = myQueue.Dequeue();
+
+            int[] original = new int[] { 1, 2, 3, 4, 5 };
+            int[] reversed = new int[] { original.Length };
+            var stack = new Stack<int>();
+            foreach(var n in original)
+            {
+                stack.Push(n);
+            }
+            Console.WriteLine("\nStack");
+            foreach (var s in stack)
+            {
+                Console.WriteLine(s);
+            }
+
+            //for(int i=0; i<original.Length; i++)
+            //{
+            //    reversed[i] = stack.Pop();
+            //}
+
+            var peopleSet = new HashSet<Person>
+            {
+                helen, new Person("Jasmine"), new Person("Andrei")
+            };
+            Console.WriteLine("\nHashSet");
+            foreach(var entry in peopleSet)
+            {
+                Console.WriteLine(entry);
+            }
+
+            var successMartin = peopleSet.Add(new Person { FirstName = "Martin", LastName = "Beard" });
+            var successHelen = peopleSet.Add(new Person { FirstName = "Helen", LastName = "Troy", Age = 22 });
+
+            //wont add if matching hashcode entity tries to get added.
+
+            var morePeople = new HashSet<Person> { new Person("Cathy"), new Person("Jasmine") };
+            peopleSet.IntersectWith(morePeople);
+
+            var personDict = new Dictionary<string, Person>
+            {
+                {"helen", helen },
+                {"Sherlock", new Person("Sherlock", "Jones"){Age = 40} }
+            };
+
+            //var p = personDict["sherlock"];
+            personDict.Add("will", will);
+
+            string input = "The cat in the hat comes back";
+            input = input.Trim().ToLower();
+            var countDict = new Dictionary<char, int>();
+            foreach(var c in input)
+            {
+                if(countDict.ContainsKey(c))
+                {
+                    countDict[c]++;
+                }
+                else
+                {
+                    countDict.Add(c, 1);
+                }
+            }
+            Console.WriteLine("Dictionary problem");
+            foreach(var entry in countDict)
+            {
+                Console.WriteLine(entry);
+            }
+
+            Console.WriteLine("\nKeys");
+            foreach(var key in countDict.Keys)
+            {
+                Console.WriteLine(key + " ");
+            }
+            Console.WriteLine("\nValues");
+            foreach(var value in countDict.Values)
+            {
+                Console.WriteLine(value);
+            }
+
+
+
 
         }
 
